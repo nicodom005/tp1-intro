@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
@@ -10,7 +10,9 @@ body {
 .login-container {
     background-color: #fff;
     padding: 20px;
-    width: 300px;
+    width: 350px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 .login-container input[type="email"],
 .login-container input[type="text"],
@@ -28,21 +30,33 @@ body {
     border-radius: 4px;
     margin-right: 100px;
 }
+.button-container {
+    padding: 15px;
+    text-align: center;
+    margin: 0 0 -10px 0;
+}
 #submit-button{
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 10px;
+    font-size: large;
+    transition: background-color 0.3s;
 }
 #submit-button:hover {
-    background-color: #45a049;
-}
-#submit-button:active {
-    background-color: #3e8e41;
+    background-color: #0056b3;
 }
 #register-link{
-    margin: 15px;
-    color: #4CAF50;
+    margin: -5px;
+    color: #007bff;
+}
+#home-link{
+    color: #007bff;
+    cursor: pointer;
+}
+#home-link:hover {
+    color: #0056b3;
 }
