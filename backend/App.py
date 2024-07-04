@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/Tp1-Intro'
+CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/tp1_intro'
 db = SQLAlchemy(app)
 
 
@@ -200,6 +202,22 @@ def eliminar_usuario(idusuario):
         db.session.delete(usuario)
         db.session.commit()
         return jsonify({'Mensaje': 'Usuario eliminaddo correctamente'}), 200
+
+
+@app.route('/login', methods=['POST'])
+def inicio_sesion():
+    datos_login = request.get_json()
+    email = datos_login.get('email')
+    password = datos_login.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Faltan datos de inicio de sesión'}), 400
+
+    usuario = Usuarios.query.filter_by(email=email, contrasenia=password).first()
+    if usuario:
+        return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
+    else:
+        return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
     
 
 
