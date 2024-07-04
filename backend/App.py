@@ -29,6 +29,87 @@ class Productos(db.Model):
 
 
 
+@app.route('/productos', methods=['GET'])
+def obtener_productos():
+    productos = Productos.query.all()
+    productos_serializados = []
+    for producto in productos:
+        producto_serializados = {
+            'id' : producto.idproducto,
+            'nombre': producto.nombre,
+            'tipo': producto.tipoproducto,
+            'precio': producto.precio,
+            'stock': producto.stock
+        }
+        productos_serializados.append(producto_serializados)
+        
+    return jsonify(productos_serializados), 200
+
+@app.route('/productos/<int:idproducto>', methods=['PUT'])
+def actualizar_producto(idproducto):
+    producto_actualizado = request.get_json()
+    if not producto_actualizado:
+        return jsonify({'Error': 'No existen datos actualizados'}), 400
+
+    producto = Productos.query.get(idproducto)
+    if not producto:
+        return jsonify({'Error': 'No existe el prodducto'}), 400
+
+    if 'nombre' in producto_actualizado:
+        producto.nombre = producto_actualizado['nombre']
+    if 'tipoproducto' in producto_actualizado:
+        producto.tipoproducto = producto_actualizado['tipoproducto']
+    if 'precio' in producto_actualizado:
+        producto.precio = producto_actualizado['precio']
+    if 'stock' in producto_actualizado:
+        producto.stock = producto_actualizado['stock']
+
+    db.session.commit()
+    return jsonify({
+        'id': producto.idproducto,
+        'nombre': producto.nombre,
+        'tipoproducto': producto.tipoproducto,
+        'precio': producto.precio,
+        'stock': producto.stock,
+    }), 200
+
+@app.route('/productos', methods=['POST'])
+def crear_producto():
+    datos_producto = request.get_json()
+    if not datos_producto:
+        return jsonify({'error': 'No se proporcionaron datos'}), 400
+
+    nuevo_producto = Productos(
+        nombre=datos_producto['nombre'],
+        tipoproducto=datos_producto['tipoproducto'],
+        precio=datos_producto['precio'],
+        stock=datos_producto['stock'],
+    )
+    db.session.add(nuevo_producto)
+    db.session.commit()
+    return jsonify({
+        'nombre': nuevo_producto.nombre,
+        'tipoproducto': nuevo_producto.tipoproducto,
+        'stock': nuevo_producto.stock,
+        'precio': nuevo_producto.precio,
+
+    }), 201
+
+
+@app.route('/productos/<int:idproducto>', methods=['DELETE'])
+def eliminar_prodducto(idproducto):
+    producto = Productos.query.get(idproducto)
+    if not producto:
+        return jsonify({'Error': 'No existe el producto'}), 400
+    else:
+        db.session.delete(producto)
+        db.session.commit()
+        return jsonify({'Mensaje': 'Producto eliminaddo correctamente'}), 200
+
+
+
+
+
 @app.route('/')
 def index():
     productos = Productos.query.all()
@@ -42,7 +123,7 @@ def index():
     return 'Consulta realizada con éxito de usuarios y productos'
 
 @app.route('/usuarios', methods=['GET'])
-def get_usuarios():
+def obtener_usuarios():
     usuarios = Usuarios.query.all()
     usuarios_serializados = []
     for usuario in usuarios:
@@ -120,5 +201,10 @@ def eliminar_usuario(idusuario):
         db.session.commit()
         return jsonify({'Mensaje': 'Usuario eliminaddo correctamente'}), 200
     
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
