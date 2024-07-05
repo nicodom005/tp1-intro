@@ -1,10 +1,8 @@
 from flask import jsonify, request , url_for, redirect
 from Config import Config
 from Models import Usuarios, Productos, db
-from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-CORS(app)
 login_manager = LoginManager()
 login_manager.init_app(Config.app)
 
@@ -220,21 +218,6 @@ def eliminar_usuario(idusuario):
         db.session.commit()
         return jsonify({'Mensaje': 'Usuario eliminaddo correctamente'}), 200
 
-
-@app.route('/login', methods=['POST'])
-def inicio_sesion():
-    datos_login = request.get_json()
-    email = datos_login.get('email')
-    password = datos_login.get('password')
-
-    if not email or not password:
-        return jsonify({'error': 'Faltan datos de inicio de sesión'}), 400
-
-    usuario = Usuarios.query.filter_by(email=email, contrasenia=password).first()
-    if usuario:
-        return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
-    else:
-        return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
     
 
 if __name__ == '__main__':
