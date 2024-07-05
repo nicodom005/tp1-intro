@@ -17,8 +17,8 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
             
-            <button type="submit" id="submit-button">Iniciar Sesión</button>
-            <a href="register.html" id="register-link">Registrarse</a>
+            <button type="submit" class="submit-button">Iniciar Sesion</button>
+            <a href="register.html" class="register-link">Registrarse</a>
         </form>
         <div class="button-container">    
             <a href="index.html" id="home-link"><i class="fa-solid fa-house"></i></a>
@@ -46,9 +46,9 @@
                 if (data.error) {
                     alert(data.error);
                 } else {
-                    alert('Inicio de sesión exitoso');
                     console.log('ID de usuario:', data.idusuario);
-                    window.location.href = 'index.html';
+                    alert('Inicio de sesión exitoso');
+                    window.location.href = 'perfil.html?id=' + data.idusuario;
                 }
             })
             .catch(error => {

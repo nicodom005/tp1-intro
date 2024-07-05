@@ -1,11 +1,11 @@
 
 from Config import Config
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_login import UserMixin
 
 db = SQLAlchemy(Config.app)
 
-class Usuarios(db.Model):
+class Usuarios(db.Model, UserMixin):
     __tablename__ = 'usuarios'
 
     idusuario = db.Column(db.Integer, primary_key=True)
@@ -13,6 +13,19 @@ class Usuarios(db.Model):
     contrasenia = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     monto = db.Column(db.Numeric, default=0)
+
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.idusuario)
 
 
 
