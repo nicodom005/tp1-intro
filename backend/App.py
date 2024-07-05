@@ -6,7 +6,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 
 
-
 login_manager = LoginManager()
 login_manager.init_app(Config.app)
 
@@ -58,6 +57,9 @@ def obtener_productos():
         
     return jsonify(productos_serializados), 200
 
+
+@Config.app.route('/productos/<int:idproducto>', methods=['PUT'])
+
 @Config.app.route('/productos/<int:idproducto>', methods=['PUT'])
 def actualizar_producto(idproducto):
     producto_actualizado = request.get_json()
@@ -86,6 +88,9 @@ def actualizar_producto(idproducto):
         'stock': producto.stock,
     }), 200
 
+
+@Config.app.route('/productos', methods=['POST'])
+
 @Config.app.route('/productos', methods=['POST'])
 def crear_producto():
     datos_producto = request.get_json()
@@ -109,6 +114,8 @@ def crear_producto():
     }), 201
 
 
+
+
 @Config.app.route('/productos/<int:idproducto>', methods=['DELETE'])
 def eliminar_producto(idproducto):
     producto = Productos.query.get(idproducto)
@@ -118,7 +125,6 @@ def eliminar_producto(idproducto):
         db.session.delete(producto)
         db.session.commit()
         return jsonify({'Mensaje': 'Producto eliminaddo correctamente'}), 200
-
 
 
 
@@ -150,16 +156,17 @@ def obtener_usuarios():
         usuarios_serializados.append(usuario_serializado)
     return jsonify(usuarios_serializados), 200
 
-
 @Config.app.route('/usuarios/<int:idusuario>', methods=['PUT'])
 @login_required
 def actualizar_usuario(idusuario):
     datos_actualizados = request.get_json()
     if not datos_actualizados:
         return jsonify({'Error': 'No existen datos actualizados'}), 400
-
     
+
     usuario = Usuarios.query.get(idusuario)
+    if not usuario:
+        return jsonify({'Error': 'No existe el usuarios'}), 400
 
     if 'nombre' in datos_actualizados:
         usuario.nombre = datos_actualizados['nombre']
@@ -178,6 +185,7 @@ def actualizar_usuario(idusuario):
         'email': usuario.email,
         'monto': usuario.monto,
     }), 200
+
 
 
 @Config.app.route('/usuarios', methods=['POST'])
@@ -203,6 +211,7 @@ def crear_usuario():
 
     }), 201
 
+
 @Config.app.route('/usuarios/<int:idusuario>', methods=['DELETE'])
 def eliminar_usuario(idusuario):
     usuarios = Usuarios.query.get(idusuario)
@@ -215,6 +224,6 @@ def eliminar_usuario(idusuario):
         return jsonify({'Mensaje': 'Usuario eliminaddo correctamente'}), 200
     
 
-
 if __name__ == '__main__':
     Config.app.run(debug=True)
+

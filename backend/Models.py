@@ -1,3 +1,4 @@
+
 from Config import Config
 from flask_sqlalchemy import SQLAlchemy
 
@@ -14,6 +15,7 @@ class Usuarios(db.Model):
     monto = db.Column(db.Numeric, default=0)
 
 
+
 class Productos(db.Model):
     __tablename__ = 'productos'
 
@@ -22,4 +24,3 @@ class Productos(db.Model):
     tipoproducto = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Numeric, default=0)
     stock = db.Column(db.Numeric, default=0)
-
