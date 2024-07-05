@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -29,11 +31,23 @@
             <button type="submit" class="submit-button" style="display: none;">Guardar Cambios</button>
 
             <a href="login.html" id="logout-link" onclick="cerrar_sesion(event)">Cerrar Sesión</a>
-
+            <div class="button-container">    
+                <a href="#" id="home-link"><i class="fa-solid fa-house"></i></a>
+            </div>
         </form>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var homeLink = document.getElementById('home-link');
+            if (userId) {
+                homeLink.href = `index.html?id=${userId}`
+            } else {
+                homeLink.href = 'index.html';
+            }
+        });
+        
         function habilitarEdicion() {
             document.getElementById('email').removeAttribute('readonly');
             document.getElementById('username').removeAttribute('readonly');
@@ -103,13 +117,6 @@
                     console.error('Error:', error);
                     alert('Hubo un error al cerrar la sesión');
                 });
-        }
-
-        function obtenerIdUsuario() {
-            var params = new URLSearchParams(window.location.search);
-            var idUsuario = params.get('id'); 
-
-            return idUsuario;
         }
 
         function cargar_perfil() {
