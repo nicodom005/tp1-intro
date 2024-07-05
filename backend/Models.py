@@ -1,19 +1,26 @@
-from flask import Flask
+
+from Config import Config
 from flask_sqlalchemy import SQLAlchemy
 
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost/Tp1-Intro'
-db = SQLAlchemy(app)
-
+db = SQLAlchemy(Config.app)
 
 class Usuarios(db.Model):
-    __tablename__ = 'Usuarios'
+    __tablename__ = 'usuarios'
 
-    idUsuarios = db.Column(db.Integer, primary_key=True)
+    idusuario = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     contrasenia = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     monto = db.Column(db.Numeric, default=0)
-    socio = db.Column(db.Boolean, default=False)
-    idCarrito = db.Column(db.Integer, default=None)
+
+
+
+class Productos(db.Model):
+    __tablename__ = 'productos'
+
+    idproducto = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    tipoproducto = db.Column(db.String(100), nullable=False)
+    precio = db.Column(db.Numeric, default=0)
+    stock = db.Column(db.Numeric, default=0)

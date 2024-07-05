@@ -1,37 +1,44 @@
-from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify, request , url_for, redirect
+from Config import Config
+from Models import Usuarios, Productos, db
 from flask_cors import CORS
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-
-app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/tp1_intro'
-db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(Config.app)
+
+@login_manager.user_loader
+def cargar_usuario(id_usuario):
+    return Usuarios.query.get(id_usuario)
+
+@Config.app.route('/login', methods=['POST'])
+def inicio_sesion():
+    datos_login = request.get_json()
+    email = datos_login.get('email')
+    password = datos_login.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Faltan datos de inicio de sesión'}), 400
+
+    usuario = Usuarios.query.filter_by(email=email, contrasenia=password).first()
+    if usuario:
+        login_user(usuario)
+        return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
+    else:
+        return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
+    
+
+@Config.app.route('/logout')
+@login_required
+def cerrar_sesion():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 
-class Usuarios(db.Model):
-    __tablename__ = 'usuarios'
 
-    idusuario = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
-    contrasenia = db.Column(db.String(10), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    monto = db.Column(db.Numeric, default=0)
-
-
-class Productos(db.Model):
-    __tablename__ = 'productos'
-
-    idproducto = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
-    tipoproducto = db.Column(db.String(100), nullable=False)
-    precio = db.Column(db.Numeric, default=0)
-    stock = db.Column(db.Numeric, default=0)
-
-
-
-@app.route('/productos', methods=['GET'])
+@Config.app.route('/productos', methods=['GET'])
 def obtener_productos():
     productos = Productos.query.all()
     productos_serializados = []
@@ -47,7 +54,10 @@ def obtener_productos():
         
     return jsonify(productos_serializados), 200
 
-@app.route('/productos/<int:idproducto>', methods=['PUT'])
+
+@Config.app.route('/productos/<int:idproducto>', methods=['PUT'])
+
+@Config.app.route('/productos/<int:idproducto>', methods=['PUT'])
 def actualizar_producto(idproducto):
     producto_actualizado = request.get_json()
     if not producto_actualizado:
@@ -75,7 +85,10 @@ def actualizar_producto(idproducto):
         'stock': producto.stock,
     }), 200
 
-@app.route('/productos', methods=['POST'])
+
+@Config.app.route('/productos', methods=['POST'])
+
+@Config.app.route('/productos', methods=['POST'])
 def crear_producto():
     datos_producto = request.get_json()
     if not datos_producto:
@@ -98,8 +111,10 @@ def crear_producto():
     }), 201
 
 
-@app.route('/productos/<int:idproducto>', methods=['DELETE'])
-def eliminar_prodducto(idproducto):
+
+
+@Config.app.route('/productos/<int:idproducto>', methods=['DELETE'])
+def eliminar_producto(idproducto):
     producto = Productos.query.get(idproducto)
     if not producto:
         return jsonify({'Error': 'No existe el producto'}), 400
@@ -111,8 +126,7 @@ def eliminar_prodducto(idproducto):
 
 
 
-
-@app.route('/')
+@Config.app.route('/')
 def index():
     productos = Productos.query.all()
     usuarios = Usuarios.query.all()
@@ -124,7 +138,7 @@ def index():
 
     return 'Consulta realizada con éxito de usuarios y productos'
 
-@app.route('/usuarios', methods=['GET'])
+@Config.app.route('/usuarios', methods=['GET'])
 def obtener_usuarios():
     usuarios = Usuarios.query.all()
     usuarios_serializados = []
@@ -139,12 +153,13 @@ def obtener_usuarios():
         usuarios_serializados.append(usuario_serializado)
     return jsonify(usuarios_serializados), 200
 
-
-@app.route('/usuarios/<int:idusuario>', methods=['PUT'])
+@Config.app.route('/usuarios/<int:idusuario>', methods=['PUT'])
+@login_required
 def actualizar_usuario(idusuario):
     datos_actualizados = request.get_json()
     if not datos_actualizados:
         return jsonify({'Error': 'No existen datos actualizados'}), 400
+    
 
     usuario = Usuarios.query.get(idusuario)
     if not usuario:
@@ -169,7 +184,8 @@ def actualizar_usuario(idusuario):
     }), 200
 
 
-@app.route('/usuarios', methods=['POST'])
+
+@Config.app.route('/usuarios', methods=['POST'])
 def crear_usuario():
     datos_usuario = request.get_json()
     if not datos_usuario:
@@ -192,7 +208,8 @@ def crear_usuario():
 
     }), 201
 
-@app.route('/usuarios/<int:idusuario>', methods=['DELETE'])
+
+@Config.app.route('/usuarios/<int:idusuario>', methods=['DELETE'])
 def eliminar_usuario(idusuario):
     usuarios = Usuarios.query.get(idusuario)
     usuario = Usuarios.query.get(idusuario)
@@ -220,9 +237,6 @@ def inicio_sesion():
         return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
     
 
-
-
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    Config.app.run(debug=True)
+

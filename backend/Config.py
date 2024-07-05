@@ -1,5 +1,7 @@
+from flask import Flask
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql://usuario:contraseña@localhost/nombre_basedatos'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'tu_clave_secreta'
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/Tp1-Intro'
+    
+

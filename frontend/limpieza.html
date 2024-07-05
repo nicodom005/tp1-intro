@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bebidas - Supermercado X</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+            <h1>Supermercado X</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#productos">Productos</a>
+                        <ul class="dropdown">
+                            <li><a href="bebidas.html">Bebidas</a></li>
+                            <li><a href="almacen.html">Almacén</a></li>
+                            <li><a href="limpieza.html">Limpieza</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#ofertas">Ofertas</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="productos" class="section">
+        <div class="container">
+            <h2>Limpieza</h2>
+            <div class="product-row">
+                <div class="product">
+                    <img src="bebida1.jpg" alt="Bebida 1">
+                    <h3>Limpieza 1</h3>
+                    <p>Precio: $5.00</p>
+                    <p>Descripción de la bebida...</p>
+                    <button onclick="agregarAlCarrito('Bebida 1', 5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="bebida2.jpg" alt="Bebida 2">
+                    <h3>Limpieza 2</h3>
+                    <p>Precio: $7.00</p>
+                    <p>Descripción de la bebida...</p>
+                    <button onclick="agregarAlCarrito('Bebida 2', 7)">Agregar al carrito</button>
+                </div>
+                <!-- Más productos de bebidas -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
+        </div>
+    </footer>
+
+    <script>
+        function agregarAlCarrito(nombre, precio) {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.push({ nombre, precio });
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            alert('Producto agregado al carrito');
+        }
+    </script>
+</body>
+</html>

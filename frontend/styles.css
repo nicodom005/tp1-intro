@@ -20,6 +20,9 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 header h1 {
@@ -27,14 +30,21 @@ header h1 {
     font-size: 3rem;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 nav ul li {
-    display: inline;
     margin-right: 20px;
+    position: relative;
 }
 
 nav ul li a {
@@ -46,6 +56,70 @@ nav ul li a {
 
 nav ul li a:hover {
     color: #f8f9fa;
+}
+
+nav ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    border-radius: 5px;
+}
+
+nav ul li:hover ul.dropdown {
+    display: block;
+}
+
+nav ul li ul.dropdown li {
+    display: block;
+    padding: 10px 20px;
+}
+
+nav ul li ul.dropdown li a {
+    display: block;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    flex: 1;
+    border-radius: 20px 0 0 20px;
+}
+
+.search-box button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.search-box button i {
+    color: #333;
+}
+
+.search-box button:hover i {
+    color: #007bff;
 }
 
 section {
@@ -60,24 +134,24 @@ section h2 {
 
 .product-row, .offer-row {
     display: flex;
-    justify-content: flex-start; /* Alinea los productos hacia la izquierda */
+    justify-content: flex-start;
     flex-wrap: wrap;
-    margin-left: -10px; /* Ajuste para compensar el espacio negativo del margen izquierdo */
+    margin-left: -10px;
 }
 
 .product, .offer {
     background-color: #fff;
     padding: 20px;
-    flex: 0 0 calc(33.33% - 20px); /* Aproximadamente 1/3 del ancho con espacio entre ellos */
+    flex: 0 0 calc(33.33% - 20px);
     margin-bottom: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    margin-left: 10px; /* Espacio entre productos */
+    margin-left: 10px;
 }
 
 .product:first-child, .offer:first-child {
-    margin-left: 0; /* Elimina el margen izquierdo del primer producto */
+    margin-left: 0;
 }
 
 .product img, .offer img {
@@ -125,14 +199,30 @@ footer p {
     font-size: 1rem;
 }
 
-#user-link{
+#user-link {
     color: #fff;
     cursor: pointer;
     transition: color 0.2s;
-    float: left;
     font-size: 1.5rem;
-    margin-left: -40px;
 }
+
 #user-link:hover {
     color: #ffffff7c;
+}
+
+
+/* Estilo para el enlace de registro */
+nav ul li:nth-last-child(2) {
+    margin-right: 20px; /* Espacio entre el enlace de carrito y registro */
+}
+
+nav ul li:nth-last-child(2) a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+nav ul li:nth-last-child(2) a:hover {
+    color: #f8f9fa;
 }
