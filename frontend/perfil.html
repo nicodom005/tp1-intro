@@ -107,16 +107,8 @@
 
         function cerrar_sesion(event) {
             event.preventDefault();
-            fetch('http://127.0.0.1:5000/logout', { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Sesión cerrada correctamente');
-                    window.location.href = 'login.html';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al cerrar la sesión');
-                });
+            localStorage.removeItem('carrito');
+            window.location.href = 'login.html';
         }
 
         function cargar_perfil() {

@@ -32,6 +32,18 @@
     </section>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var userLink = document.getElementById('user-link');
+
+            if (userId) {
+                userLink.href = `index.html?id=${userId}`
+            } 
+            else{
+                userLink.href = 'index.html';
+            }
+        });
+
         function cargarCarrito() {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             const carritoItems = document.getElementById('carrito-items');
@@ -66,7 +78,7 @@
                     alert('Compra realizada exitosamente');
                     cargarCarrito();
                 } else {
-                    alert('Hubo un problema al procesar el pago.');
+                    alert(data.message);
                 }
             })
             .catch(error => {
