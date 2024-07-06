@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bebidas - Supermercado X</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+
 </head>
 <body>
     <header>
@@ -15,14 +17,14 @@
                 <ul>
                     <li><a href="index.html#productos">Productos</a>
                         <ul class="dropdown">
-                            <li><a href="bebidas.html">Bebidas</a></li>
-                            <li><a href="almacen.html">Almacén</a></li>
-                            <li><a href="limpieza.html">Limpieza</a></li>
+                            <li><a href="#" id="bebidas-link">Bebidas</a></li>
+                            <li><a href="#" id="almacen-link">Almacén</a></li>
+                            <li><a href="#" id="limpieza-link">Limpieza</a></li>
                         </ul>
                     </li>
                     <li><a href="index.html#ofertas">Ofertas</a></li>
                     <li><a href="index.html#contacto">Contacto</a></li>
-                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="#" id="carrito-link">Carrito</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,6 +46,27 @@
     </footer>
 
     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var bebidasLink = document.getElementById('bebidas-link');
+            var almacenLink = document.getElementById('almacen-link');
+            var limpiezaLink = document.getElementById('limpieza-link');
+            var carritoLink = document.getElementById('carrito-link');
+
+            if (userId) {
+                bebidasLink.href = `bebidas.html?id=${userId}`
+                almacenLink.href = `almacen.html?id=${userId}`
+                limpiezaLink.href = `limpieza.html?id=${userId}`
+                carritoLink.href = `carrito.html?id=${userId}`
+            } 
+            else{
+                bebidasLink.href = 'bebidas.html';
+                almacenLink.href = 'almacen.html';
+                limpiezaLink.href = 'limpieza.html';
+                carritoLink.href = 'carrito.html';
+            }
+        });
+
         function agregarAlCarrito(nombre, precio) {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             carrito.push({ nombre, precio });

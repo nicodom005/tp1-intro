@@ -141,6 +141,33 @@ def eliminar_producto(idproducto):
         return jsonify({'Mensaje': 'Producto eliminaddo correctamente'}), 200
 
 
+@app.route('/procesar_pago/<int:idusuario>', methods=['POST'])
+def procesar_pago(idusuario):
+    carrito = request.json 
+    precio = 0
+    for item in carrito:
+        producto = Productos.query.filter_by(nombre=item['nombre']).first()
+        precio += producto.precio
+        if producto:
+            producto.stock -= 1
+            print(f"Stock de {producto.nombre}: {producto.stock}")
+            if producto.stock < 0:
+                return jsonify({'success': False, 'message': 'Stock insuficiente para ' + item['nombre']}), 400
+
+    print(f"Total a pagar: {precio}")
+    usuario = Usuarios.query.get(idusuario)
+    if usuario.monto < precio:
+        return jsonify({'success': False, 'message': 'Saldo insuficiente'}), 400
+    else:
+        usuario.monto -= precio
+    print(f"Saldo restante: {usuario.monto}")
+
+    db.session.commit()
+    return jsonify({'success': True})
+
+
+
+
 @app.route('/')
 def index():
     productos = Productos.query.all()
