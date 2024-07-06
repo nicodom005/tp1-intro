@@ -23,7 +23,33 @@ class Usuarios(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     monto = db.Column(db.Numeric, default=0)
 
+<<<<<<< Updated upstream
 
+=======
+class Productos(db.Model):
+    __tablename__ = 'productos'
+>>>>>>> Stashed changes
+
+@app.route('/login', methods=['POST'])
+def inicio_sesion():
+    datos_login = request.get_json()
+    email = datos_login.get('email')
+    password = datos_login.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Faltan datos de inicio de sesión'}), 400
+
+    usuario = Usuarios.query.filter_by(email=email, contrasenia=password).first()
+    if usuario:
+        return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
+    else:
+        return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
+    
+
+@app.route('/logout')
+def cerrar_sesion():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST'])
 def inicio_sesion():
@@ -49,17 +75,23 @@ def cerrar_sesion():
 
 @app.route('/productos', methods=['GET'])
 def obtener_productos():
-    productos = Productos.query.all()
+    tipo_producto = request.args.get('tipo', default='', type=str)
+    
+    if tipo_producto:
+        productos = Productos.query.filter_by(tipoproducto=tipo_producto).all()
+    else:
+        productos = Productos.query.all()  
+
     productos_serializados = []
     for producto in productos:
-        producto_serializados = {
-            'id' : producto.idproducto,
+        producto_serializado = {
+            'id': producto.idproducto,
             'nombre': producto.nombre,
             'tipo': producto.tipoproducto,
             'precio': producto.precio,
             'stock': producto.stock
         }
-        productos_serializados.append(producto_serializados)
+        productos_serializados.append(producto_serializado)
         
     return jsonify(productos_serializados), 200
 

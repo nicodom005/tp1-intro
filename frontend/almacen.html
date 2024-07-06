@@ -31,22 +31,8 @@
     <section id="productos" class="section">
         <div class="container">
             <h2>Almacen</h2>
-            <div class="product-row">
-                <div class="product">
-                    <img src="bebida1.jpg" alt="Bebida 1">
-                    <h3>Bebida 1</h3>
-                    <p>Precio: $5.00</p>
-                    <p>Descripción de la bebida...</p>
-                    <button onclick="agregarAlCarrito('Bebida 1', 5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="bebida2.jpg" alt="Bebida 2">
-                    <h3>Bebida 2</h3>
-                    <p>Precio: $7.00</p>
-                    <p>Descripción de la bebida...</p>
-                    <button onclick="agregarAlCarrito('Bebida 2', 7)">Agregar al carrito</button>
-                </div>
-                <!-- Más productos de bebidas -->
+            <div class="product-row" id="productos-container">
+                <!-- Productos almacen -->
             </div>
         </div>
     </section>
@@ -64,6 +50,38 @@
             localStorage.setItem('carrito', JSON.stringify(carrito));
             alert('Producto agregado al carrito');
         }
+
+        function cargarProductos() {
+            console.log('Cargando productos...');
+            let url = `http://127.0.0.1:5000/productos?tipo=almacen`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(productos => {
+                    const container = document.getElementById('productos-container');
+                    container.innerHTML = ''; 
+
+                    productos.forEach(producto => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product';
+
+                        productDiv.innerHTML = `
+                            <img src="images/${producto.nombre.toLowerCase().replace(/ /g, '')}.jpg" alt="${producto.nombre}">
+                            <h3>${producto.nombre}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción del producto...</p>
+                            <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+                        `;
+                        
+                        container.appendChild(productDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los productos:', error);
+                });
+        }
+
+        window.onload = cargarProductos;
     </script>
 </body>
 </html>
