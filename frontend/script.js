@@ -1,3 +1,12 @@
+
+function obtenerIdUsuario() {
+    var params = new URLSearchParams(window.location.search);
+    var idUsuario = params.get('id'); 
+
+    return idUsuario;
+}
+
+
 // Array para almacenar los productos en el carrito
 let cart = [];
 
@@ -26,6 +35,7 @@ function updateCart() {
         });
     }
 }
+
 
 // Función para eliminar un producto del carrito
 function removeFromCart(index) {
