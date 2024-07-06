@@ -23,33 +23,15 @@ class Usuarios(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     monto = db.Column(db.Numeric, default=0)
 
-<<<<<<< Updated upstream
-
-=======
 class Productos(db.Model):
     __tablename__ = 'productos'
->>>>>>> Stashed changes
 
-@app.route('/login', methods=['POST'])
-def inicio_sesion():
-    datos_login = request.get_json()
-    email = datos_login.get('email')
-    password = datos_login.get('password')
+    idproducto = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    tipoproducto = db.Column(db.String(100), nullable=False)
+    precio = db.Column(db.Numeric, default=0)
+    stock = db.Column(db.Numeric, default=0)
 
-    if not email or not password:
-        return jsonify({'error': 'Faltan datos de inicio de sesión'}), 400
-
-    usuario = Usuarios.query.filter_by(email=email, contrasenia=password).first()
-    if usuario:
-        return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
-    else:
-        return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
-    
-
-@app.route('/logout')
-def cerrar_sesion():
-    logout_user()
-    return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST'])
 def inicio_sesion():
