@@ -70,6 +70,12 @@
                 alert('Error en la solicitud de registro');
             });
         }
+
+        function cerrar_sesion() {
+            localStorage.removeItem('carrito');
+        }
+
+        window.onload = cerrar_sesion;
     </script>
 
 </body>

@@ -47,12 +47,6 @@ def inicio_sesion():
         return jsonify({'mensaje': 'Inicio de sesión exitoso', 'idusuario': usuario.idusuario}), 200
     else:
         return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
-    
-
-@app.route('/logout')
-def cerrar_sesion():
-    logout_user()
-    return redirect(url_for('login'))
 
 
 @app.route('/productos', methods=['GET'])
