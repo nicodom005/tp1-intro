@@ -27,8 +27,8 @@
             <label for="monto">Monto:</label>
             <input type="number" id="monto" name="monto" readonly>
 
-            <button type="button" class="submit-button" onclick="habilitarEdicion()">Editar Perfil</button>
-            <button type="submit" class="submit-button" style="display: none;">Guardar Cambios</button>
+            <button type="button" id="edit-button" class="submit-button" onclick="habilitarEdicion()">Editar Perfil</button>
+            <button type="submit" id="submit-button" class="submit-button" style="display: none;">Guardar Cambios</button>
 
             <a href="login.html" id="logout-link" onclick="cerrar_sesion(event)">Cerrar Sesión</a>
             <div class="button-container">    
@@ -101,7 +101,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                //alert('Hubo un error al actualizar el perfil');
+                alert('Hubo un error al actualizar el perfil');
             });
         }
 
