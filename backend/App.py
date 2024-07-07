@@ -31,6 +31,7 @@ class Productos(db.Model):
     tipoproducto = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Numeric, default=0)
     stock = db.Column(db.Numeric, default=0)
+    imagen_url = db.Column(db.String(255)) 
 
 
 @app.route('/login', methods=['POST'])
@@ -65,7 +66,8 @@ def obtener_productos():
             'nombre': producto.nombre,
             'tipo': producto.tipoproducto,
             'precio': producto.precio,
-            'stock': producto.stock
+            'stock': producto.stock,
+            'imagen_url': producto.imagen_url if producto.imagen_url else 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg'
         }
         productos_serializados.append(producto_serializado)
         
@@ -90,6 +92,8 @@ def actualizar_producto(idproducto):
         producto.precio = producto_actualizado['precio']
     if 'stock' in producto_actualizado:
         producto.stock = producto_actualizado['stock']
+    if 'imagen_url' in producto_actualizado:
+        producto.imagen_url = producto_actualizado['imagen_url']
 
     db.session.commit()
     return jsonify({
@@ -112,6 +116,7 @@ def crear_producto():
         tipoproducto=datos_producto['tipoproducto'],
         precio=datos_producto['precio'],
         stock=datos_producto['stock'],
+        imagen_url=datos_producto['imagen_url']
     )
     db.session.add(nuevo_producto)
     db.session.commit()
@@ -120,6 +125,7 @@ def crear_producto():
         'tipoproducto': nuevo_producto.tipoproducto,
         'stock': nuevo_producto.stock,
         'precio': nuevo_producto.precio,
+        'imagen_url': nuevo_producto.imagen_url
 
     }), 201
 

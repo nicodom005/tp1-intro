@@ -89,7 +89,7 @@
                         productDiv.className = 'product';
 
                         productDiv.innerHTML = `
-                            <img src="images/${producto.nombre.toLowerCase().replace(/ /g, '')}.jpg" alt="${producto.nombre}">
+                            <img src="${producto.imagen_url}">  
                             <h3>${producto.nombre}</h3>
                             <p>Precio: $${producto.precio}</p>
                             <p>Descripción del producto...</p>

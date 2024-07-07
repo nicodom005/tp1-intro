@@ -37,3 +37,4 @@ class Productos(db.Model):
     tipoproducto = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Numeric, default=0)
     stock = db.Column(db.Numeric, default=0)
+    imagen_url = db.Column(db.String(255)) 
