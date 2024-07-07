@@ -5,20 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <a href="index.html" id="user-link"><i class="fa-solid fa-user"></i></a>
-            <h1>Carrito de Compras</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#productos">Productos</a></li>
-                    <li><a href="index.html#ofertas">Ofertas</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                </ul>
-            </nav>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -26,35 +51,22 @@
         <div class="container">
             <h2>Tu Carrito</h2>
             <div id="carrito-items"></div>
-            <button onclick="procesarPago()">Proceder a Pagar</button>
+            <div class="carrito-total">
+                <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                <p>Impuestos: <span id="impuestos">$0.00</span></p>
+                <p>Total: <span id="total">$0.00</span></p>
+                <button id="checkout" onclick="procesarPago()">Proceder a Pagar</button>
+            </div>
         </div>
     </section>
 
-    <script>
-        function cargarCarrito() {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            const carritoItems = document.getElementById('carrito-items');
-            carritoItems.innerHTML = '';
-            carrito.forEach(item => {
-                const div = document.createElement('div');
-                div.innerHTML = `${item.nombre} - $${item.precio}`;
-                carritoItems.appendChild(div);
-            });
-        }
+    <footer id="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
+        </div>
+    </footer>
 
-        function procesarPago() {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            if (carrito.length === 0) {
-                alert('El carrito está vacío.');
-                return;
-            }
-
-            localStorage.removeItem('carrito');
-            alert('Compra realizada exitosamente');
-            cargarCarrito();
-        }
-
-        window.onload = cargarCarrito;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
