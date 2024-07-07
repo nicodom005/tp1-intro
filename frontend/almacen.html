@@ -3,38 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebidas - Supermercado X</title>
+    <title>Supermercado X</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
-            <h1>Supermercado X</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#productos">Productos</a>
-                        <ul class="dropdown">
-                            <li><a href="#" id="bebidas-link">Bebidas</a></li>
-                            <li><a href="#" id="almacen-link">Almacén</a></li>
-                            <li><a href="#" id="limpieza-link">Limpieza</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="index.html#ofertas">Ofertas</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                    <li><a href="#" id="carrito-link">Carrito</a></li>
-                </ul>
-            </nav>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section id="productos" class="section">
+    <section id="almacen" class="section">
         <div class="container">
             <h2>Almacen</h2>
             <div class="product-row" id="productos-container">
                 <!-- Productos almacen -->
+
+                <div class="product">
+                    <img src="images/almacen1.jpg" alt="Producto de almacén 1">
+                    <h3>Producto de Almacén 1</h3>
+                    <p>Precio: $5.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Producto de Almacén 1', 5)">Agregar al carrito</button>
+                </div>
+      
             </div>
         </div>
     </section>
@@ -44,7 +69,6 @@
             <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
@@ -66,13 +90,6 @@
                 carritoLink.href = 'carrito.html';
             }
         });
-
-        function agregarAlCarrito(nombre, precio) {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.push({ nombre, precio });
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            alert('Producto agregado al carrito');
-        }
 
         function cargarProductos() {
             console.log('Cargando productos...');
@@ -106,5 +123,6 @@
 
         window.onload = cargarProductos;
     </script>
+    <script src="script.js"></script>
 </body>
 </html>

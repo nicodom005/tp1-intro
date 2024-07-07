@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado X</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="verduras" class="section">
+        <div class="container">
+            <h2>Verduras</h2>
+            <div class="product-row">
+                <div class="product">
+                    <img src="images/verdura1.jpg" alt="Verdura 1">
+                    <h3>Verdura 1</h3>
+                    <p>Precio: $5.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 1', 5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura2.jpg" alt="Verdura 2">
+                    <h3>Verdura 2</h3>
+                    <p>Precio: $7.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 2', 7)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura3.jpg" alt="Verdura 3">
+                    <h3>Verdura 3</h3>
+                    <p>Precio: $6.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 3', 6)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura4.jpg" alt="Verdura 4">
+                    <h3>Verdura 4</h3>
+                    <p>Precio: $4.50</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 4', 4.5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura5.jpg" alt="Verdura 5">
+                    <h3>Verdura 5</h3>
+                    <p>Precio: $3.75</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 5', 3.75)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura6.jpg" alt="Verdura 6">
+                    <h3>Verdura 6</h3>
+                    <p>Precio: $5.25</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 6', 5.25)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura7.jpg" alt="Verdura 7">
+                    <h3>Verdura 7</h3>
+                    <p>Precio: $6.50</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 7', 6.5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura8.jpg" alt="Verdura 8">
+                    <h3>Verdura 8</h3>
+                    <p>Precio: $5.80</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 8', 5.8)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura9.jpg" alt="Verdura 9">
+                    <h3>Verdura 9</h3>
+                    <p>Precio: $4.90</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 9', 4.9)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/verdura10.jpg" alt="Verdura 10">
+                    <h3>Verdura 10</h3>
+                    <p>Precio: $7.25</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Verdura 10', 7.25)">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

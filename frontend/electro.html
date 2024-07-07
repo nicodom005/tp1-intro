@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado X</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="electro" class="section">
+        <div class="container">
+            <h2>Electro</h2>
+            <div class="product-row">
+                <div class="product">
+                    <img src="images/electro1.jpg" alt="Electro 1">
+                    <h3>Electro 1</h3>
+                    <p>Precio: $100.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 1', 100)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro2.jpg" alt="Electro 2">
+                    <h3>Electro 2</h3>
+                    <p>Precio: $200.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 2', 200)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro3.jpg" alt="Electro 3">
+                    <h3>Electro 3</h3>
+                    <p>Precio: $300.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 3', 300)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro4.jpg" alt="Electro 4">
+                    <h3>Electro 4</h3>
+                    <p>Precio: $400.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 4', 400)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro5.jpg" alt="Electro 5">
+                    <h3>Electro 5</h3>
+                    <p>Precio: $500.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 5', 500)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro6.jpg" alt="Electro 6">
+                    <h3>Electro 6</h3>
+                    <p>Precio: $600.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 6', 600)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro7.jpg" alt="Electro 7">
+                    <h3>Electro 7</h3>
+                    <p>Precio: $700.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 7', 700)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro8.jpg" alt="Electro 8">
+                    <h3>Electro 8</h3>
+                    <p>Precio: $800.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 8', 800)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro9.jpg" alt="Electro 9">
+                    <h3>Electro 9</h3>
+                    <p>Precio: $900.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 9', 900)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/electro10.jpg" alt="Electro 10">
+                    <h3>Electro 10</h3>
+                    <p>Precio: $1000.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Electro 10', 1000)">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

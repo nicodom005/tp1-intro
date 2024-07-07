@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado X</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="pescados" class="section">
+        <div class="container">
+            <h2>Pescados</h2>
+            <div class="product-row">
+                <div class="product">
+                    <img src="images/pescado1.jpg" alt="Pescado 1">
+                    <h3>Pescado 1</h3>
+                    <p>Precio: $5.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 1', 5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado2.jpg" alt="Pescado 2">
+                    <h3>Pescado 2</h3>
+                    <p>Precio: $7.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 2', 7)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado3.jpg" alt="Pescado 3">
+                    <h3>Pescado 3</h3>
+                    <p>Precio: $6.00</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 3', 6)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado4.jpg" alt="Pescado 4">
+                    <h3>Pescado 4</h3>
+                    <p>Precio: $4.50</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 4', 4.5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado5.jpg" alt="Pescado 5">
+                    <h3>Pescado 5</h3>
+                    <p>Precio: $3.75</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 5', 3.75)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado6.jpg" alt="Pescado 6">
+                    <h3>Pescado 6</h3>
+                    <p>Precio: $5.25</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 6', 5.25)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado7.jpg" alt="Pescado 7">
+                    <h3>Pescado 7</h3>
+                    <p>Precio: $6.50</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 7', 6.5)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado8.jpg" alt="Pescado 8">
+                    <h3>Pescado 8</h3>
+                    <p>Precio: $5.80</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 8', 5.8)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado9.jpg" alt="Pescado 9">
+                    <h3>Pescado 9</h3>
+                    <p>Precio: $4.90</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 9', 4.9)">Agregar al carrito</button>
+                </div>
+                <div class="product">
+                    <img src="images/pescado10.jpg" alt="Pescado 10">
+                    <h3>Pescado 10</h3>
+                    <p>Precio: $7.25</p>
+                    <p>Descripción del producto...</p>
+                    <button onclick="addToCart('Pescado 10', 7.25)">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

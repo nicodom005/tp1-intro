@@ -10,44 +10,76 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Supermercado X</h1>
-            <div class="header-actions">
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
                 <nav>
                     <ul>
-                        <li><a href="#productos">Productos</a>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
                             <ul class="dropdown">
-                                <li><a href="#" id="bebidas-link">Bebidas</a></li>
-                                <li><a href="#" id="almacen-link">Almacén</a></li>
-                                <li><a href="#" id="limpieza-link">Limpieza</a></li>
+                                <li><a href="bebidas.html">Bebidas</a></li>
+                                <li><a href="almacen.html">Almacén</a></li>
+                                <li><a href="limpieza.html">Limpieza</a></li>
+                                <li><a href="electro.html">Electro</a></li>
+                                <li><a href="pescados.html">Pescados</a></li>
+                                <li><a href="verduras.html">Verduras</a></li>
                             </ul>
                         </li>
-                        <li><a href="#ofertas">Ofertas</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#" id="carrito-link">Carrito</a></li>
-                        <li><a href="register.html">Registro</a></li> 
+                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
                     </ul>
                 </nav>
                 <div class="search-container">
                     <div class="search-box">
                         <input type="text" placeholder="Buscar...">
-                        <button type="submit"><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="productos" class="section">
-        <!-- Contenido de la sección productos -->
+    <section id="publicidad" class="section">
+        <div class="container">
+            <h2>Ofertas y Descuentos</h2>
+            <div class="carousel">
+                <div class="slides">
+                    <img src="images/publicidad1.jpg" alt="Publicidad 1" class="active">
+                    <img src="images/publicidad2.jpg" alt="Publicidad 2">
+                    <img src="images/publicidad3.jpg" alt="Publicidad 3">
+                    <img src="images/publicidad4.jpg" alt="Publicidad 4">
+                    <img src="images/publicidad5.jpg" alt="Publicidad 5">
+                </div>
+                <div class="carousel-controls">
+                    <span class="prev">&#10094;</span>
+                    <span class="next">&#10095;</span>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="ofertas" class="section">
-        <!-- Contenido de la sección ofertas -->
-    </section>
+
+
+
 
     <footer id="contacto">
         <div class="container">
+            <h2>Contacto</h2>
             <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
         </div>
     </footer>
@@ -73,13 +105,6 @@
                 carritoLink.href = 'carrito.html';
             }
         });
-        
-        function agregarAlCarrito(nombre, precio) {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.push({ nombre, precio });
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            alert('Producto agregado al carrito');
-        }
 
         function cargarProductos() {
             console.log('Cargando productos...');
