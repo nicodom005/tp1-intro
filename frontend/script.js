@@ -1,3 +1,11 @@
+
+function obtenerIdUsuario() {
+    var params = new URLSearchParams(window.location.search);
+    var idUsuario = params.get('id'); 
+
+    return idUsuario;
+}
+
 // Función para agregar productos al carrito
 function addToCart(name, price) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -52,7 +60,6 @@ function procesarPago() {
         alert('El carrito está vacío.');
         return;
     }
-
     localStorage.removeItem('cart');
     alert('Compra realizada exitosamente');
     loadCart();

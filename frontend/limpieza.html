@@ -49,77 +49,8 @@
     <section id="limpieza" class="section">
         <div class="container">
             <h2>Limpieza</h2>
-            <div class="product-row">
-                <div class="product">
-                    <img src="images/limpieza1.jpg" alt="Producto de limpieza 1">
-                    <h3>Producto de Limpieza 1</h3>
-                    <p>Precio: $5.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 1', 5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza2.jpg" alt="Producto de limpieza 2">
-                    <h3>Producto de Limpieza 2</h3>
-                    <p>Precio: $7.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 2', 7)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza3.jpg" alt="Producto de limpieza 3">
-                    <h3>Producto de Limpieza 3</h3>
-                    <p>Precio: $6.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 3', 6)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza4.jpg" alt="Producto de limpieza 4">
-                    <h3>Producto de Limpieza 4</h3>
-                    <p>Precio: $4.50</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 4', 4.5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza5.jpg" alt="Producto de limpieza 5">
-                    <h3>Producto de Limpieza 5</h3>
-                    <p>Precio: $3.75</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 5', 3.75)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza6.jpg" alt="Producto de limpieza 6">
-                    <h3>Producto de Limpieza 6</h3>
-                    <p>Precio: $5.25</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 6', 5.25)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza7.jpg" alt="Producto de limpieza 7">
-                    <h3>Producto de Limpieza 7</h3>
-                    <p>Precio: $6.50</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 7', 6.5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza8.jpg" alt="Producto de limpieza 8">
-                    <h3>Producto de Limpieza 8</h3>
-                    <p>Precio: $5.80</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 8', 5.8)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza9.jpg" alt="Producto de limpieza 9">
-                    <h3>Producto de Limpieza 9</h3>
-                    <p>Precio: $4.90</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 9', 4.9)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/limpieza10.jpg" alt="Producto de limpieza 10">
-                    <h3>Producto de Limpieza 10</h3>
-                    <p>Precio: $7.25</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Producto de Limpieza 10', 7.25)">Agregar al carrito</button>
-                </div>
+            <div class="product-row" id="productos-container">
+                <!-- Productos de limpieza -->
             </div>
         </div>
     </section>
@@ -130,6 +61,60 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var bebidasLink = document.getElementById('bebidas-link');
+            var almacenLink = document.getElementById('almacen-link');
+            var limpiezaLink = document.getElementById('limpieza-link');
+            var carritoLink = document.getElementById('carrito-link');
+
+            if (userId) {
+                bebidasLink.href = `bebidas.html?id=${userId}`
+                almacenLink.href = `almacen.html?id=${userId}`
+                limpiezaLink.href = `limpieza.html?id=${userId}`
+                carritoLink.href = `carrito.html?id=${userId}`
+            } 
+            else{
+                bebidasLink.href = 'bebidas.html';
+                almacenLink.href = 'almacen.html';
+                limpiezaLink.href = 'limpieza.html';
+                carritoLink.href = 'carrito.html';
+            }
+        });
+
+        function cargarProductos() {
+            console.log('Cargando productos...');
+            let url = `http://127.0.0.1:5000/productos?tipo=limpieza`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(productos => {
+                    const container = document.getElementById('productos-container');
+                    container.innerHTML = ''; 
+
+                    productos.forEach(producto => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product';
+
+                        productDiv.innerHTML = `
+                            <img src="${producto.imagen_url}">
+                            <h3>${producto.nombre}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción del producto...</p>
+                            <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+                        `;
+                        
+                        container.appendChild(productDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los productos:', error);
+                });
+        }
+
+        window.onload = cargarProductos;
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

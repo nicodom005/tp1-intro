@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -59,6 +60,51 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var userLink = document.getElementById('user-link');
+
+            if (userId) {
+                userLink.href = `index.html?id=${userId}`
+            } 
+            else{
+                userLink.href = 'index.html';
+            }
+        });
+
+        function procesarPago() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            if (carrito.length === 0) {
+                alert('El carrito está vacío.');
+                return;
+            }
+
+            var idUsuario = obtenerIdUsuario();
+
+            fetch('http://127.0.0.1:5000/procesar_pago/' + idUsuario, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carrito)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.removeItem('carrito');
+                    alert('Compra realizada exitosamente');
+                    cargarCarrito();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar el pago.');
+            });
+        }
 
     <footer id="contacto">
         <div class="container">
