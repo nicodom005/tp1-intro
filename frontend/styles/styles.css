@@ -305,6 +305,10 @@ nav ul li:nth-last-child(2) a:hover {
 .title-logo {
     display: flex;
     align-items: center;
+    font-size: 3rem; /* Tamaño de la fuente */
+    color: #dab87b; /* Cambiar el color de la fuente */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agregar sombra al texto */
+    font-family: 'Lobster', cursive; /* Cambiar la fuente */
 }
 
 .top-header .container {
