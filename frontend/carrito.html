@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="carrito.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="script.js"></script>
 </head>
@@ -13,7 +13,7 @@
     <header>
         <div class="top-header">
             <div class="container header-content">
-                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <a href="perfil.html" id="user-link"><i class="fa-solid fa-user"></i></a>
                 <div class="title-logo">
                     <h1>Supermercado X</h1>
                     <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
@@ -24,18 +24,18 @@
             <div class="container header-actions">
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html" id="home-link">Home</a></li>
                         <li><a href="#" class="no-link">Productos</a>
                             <ul class="dropdown">
-                                <li><a href="bebidas.html">Bebidas</a></li>
-                                <li><a href="almacen.html">Almacén</a></li>
-                                <li><a href="limpieza.html">Limpieza</a></li>
-                                <li><a href="electro.html">Electro</a></li>
-                                <li><a href="pescados.html">Pescados</a></li>
-                                <li><a href="verduras.html">Verduras</a></li>
+                                <li><a href="bebidas.html" id="bebidas-link">Bebidas</a></li>
+                                <li><a href="almacen.html" id="almacen-link">Almacén</a></li>
+                                <li><a href="limpieza.html" id="limpieza-link">Limpieza</a></li>
+                                <li><a href="electro.html" id="electro-link">Electro</a></li>
+                                <li><a href="pescados.html" id="pescados-link">Pescados</a></li>
+                                <li><a href="verduras.html" id="verduras-link">Verduras</a></li>
                             </ul>
                         </li>
-                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li><a href="carrito.html" id="carrito-link"><i class="fas fa-shopping-cart"></i></a></li>
                     </ul>
                 </nav>
                 <div class="search-container">
@@ -65,47 +65,29 @@
         document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
             var userLink = document.getElementById('user-link');
+            var homeLink = document.getElementById('home-link');
+            var bebidasLink = document.getElementById('bebidas-link');
+            var almacenLink = document.getElementById('almacen-link');
+            var limpiezaLink = document.getElementById('limpieza-link');
+            var electroLink = document.getElementById('electro-link');
+            var pescadosLink = document.getElementById('pescados-link');
+            var verdurasLink = document.getElementById('verduras-link');
+            var carritoLink = document.getElementById('carrito-link');
 
             if (userId) {
-                userLink.href = `index.html?id=${userId}`
+                userLink.href = `perfil.html?id=${userId}`
+                homeLink.href = `index.html?id=${userId}`
+                bebidasLink.href = `bebidas.html?id=${userId}`
+                almacenLink.href = `almacen.html?id=${userId}`
+                limpiezaLink.href = `limpieza.html?id=${userId}`
+                electroLink.href = `electro.html?id=${userId}`
+                pescadosLink.href = `pescados.html?id=${userId}`
+                verdurasLink.href = `verduras.html?id=${userId}`
+                carritoLink.href = `carrito.html?id=${userId}`
             } 
-            else{
-                userLink.href = 'index.html';
-            }
         });
-
-        function procesarPago() {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            if (carrito.length === 0) {
-                alert('El carrito está vacío.');
-                return;
-            }
-
-            var idUsuario = obtenerIdUsuario();
-
-            fetch('http://127.0.0.1:5000/procesar_pago/' + idUsuario, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(carrito)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    localStorage.removeItem('carrito');
-                    alert('Compra realizada exitosamente');
-                    cargarCarrito();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Hubo un error al procesar el pago.');
-            });
-        }
-
+    </script>
+    
     <footer id="contacto">
         <div class="container">
             <h2>Contacto</h2>

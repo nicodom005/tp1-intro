@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermercado X</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/verduras.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="top-header">
             <div class="container header-content">
-                <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <a href="perfil.html" id="user-link"><i class="fa-solid fa-user"></i></a>
                 <div class="title-logo">
                     <h1>Supermercado X</h1>
                     <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
@@ -22,18 +23,18 @@
             <div class="container header-actions">
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html" id="home-link">Home</a></li>
                         <li><a href="#" class="no-link">Productos</a>
                             <ul class="dropdown">
-                                <li><a href="bebidas.html">Bebidas</a></li>
-                                <li><a href="almacen.html">Almacén</a></li>
-                                <li><a href="limpieza.html">Limpieza</a></li>
-                                <li><a href="electro.html">Electro</a></li>
-                                <li><a href="pescados.html">Pescados</a></li>
-                                <li><a href="verduras.html">Verduras</a></li>
+                                <li><a href="bebidas.html" id="bebidas-link">Bebidas</a></li>
+                                <li><a href="almacen.html" id="almacen-link">Almacén</a></li>
+                                <li><a href="limpieza.html" id="limpieza-link">Limpieza</a></li>
+                                <li><a href="electro.html" id="electro-link">Electro</a></li>
+                                <li><a href="pescados.html" id="pescados-link">Pescados</a></li>
+                                <li><a href="verduras.html" id="verduras-link">Verduras</a></li>
                             </ul>
                         </li>
-                        <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li><a href="carrito.html" id="carrito-link"><i class="fas fa-shopping-cart"></i></a></li>
                     </ul>
                 </nav>
                 <div class="search-container">
@@ -49,77 +50,8 @@
     <section id="verduras" class="section">
         <div class="container">
             <h2>Verduras</h2>
-            <div class="product-row">
-                <div class="product">
-                    <img src="images/verdura1.jpg" alt="Verdura 1">
-                    <h3>Verdura 1</h3>
-                    <p>Precio: $5.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 1', 5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura2.jpg" alt="Verdura 2">
-                    <h3>Verdura 2</h3>
-                    <p>Precio: $7.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 2', 7)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura3.jpg" alt="Verdura 3">
-                    <h3>Verdura 3</h3>
-                    <p>Precio: $6.00</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 3', 6)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura4.jpg" alt="Verdura 4">
-                    <h3>Verdura 4</h3>
-                    <p>Precio: $4.50</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 4', 4.5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura5.jpg" alt="Verdura 5">
-                    <h3>Verdura 5</h3>
-                    <p>Precio: $3.75</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 5', 3.75)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura6.jpg" alt="Verdura 6">
-                    <h3>Verdura 6</h3>
-                    <p>Precio: $5.25</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 6', 5.25)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura7.jpg" alt="Verdura 7">
-                    <h3>Verdura 7</h3>
-                    <p>Precio: $6.50</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 7', 6.5)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura8.jpg" alt="Verdura 8">
-                    <h3>Verdura 8</h3>
-                    <p>Precio: $5.80</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 8', 5.8)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura9.jpg" alt="Verdura 9">
-                    <h3>Verdura 9</h3>
-                    <p>Precio: $4.90</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 9', 4.9)">Agregar al carrito</button>
-                </div>
-                <div class="product">
-                    <img src="images/verdura10.jpg" alt="Verdura 10">
-                    <h3>Verdura 10</h3>
-                    <p>Precio: $7.25</p>
-                    <p>Descripción del producto...</p>
-                    <button onclick="addToCart('Verdura 10', 7.25)">Agregar al carrito</button>
-                </div>
+            <div class="product-row" id="productos-container">
+                <!-- Productos verduras -->
             </div>
         </div>
     </section>
@@ -130,6 +62,76 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userId = obtenerIdUsuario();
+            var userLink = document.getElementById('user-link');
+            var homeLink = document.getElementById('home-link');
+            var bebidasLink = document.getElementById('bebidas-link');
+            var almacenLink = document.getElementById('almacen-link');
+            var limpiezaLink = document.getElementById('limpieza-link');
+            var electroLink = document.getElementById('electro-link');
+            var pescadosLink = document.getElementById('pescados-link');
+            var verdurasLink = document.getElementById('verduras-link');
+            var carritoLink = document.getElementById('carrito-link');
+
+            if (userId) {
+                userLink.href = `perfil.html?id=${userId}`
+                homeLink.href = `index.html?id=${userId}`
+                bebidasLink.href = `bebidas.html?id=${userId}`
+                almacenLink.href = `almacen.html?id=${userId}`
+                limpiezaLink.href = `limpieza.html?id=${userId}`
+                electroLink.href = `electro.html?id=${userId}`
+                pescadosLink.href = `pescados.html?id=${userId}`
+                verdurasLink.href = `verduras.html?id=${userId}`
+                carritoLink.href = `carrito.html?id=${userId}`
+            } 
+        });
+
+        function cargarProductos() {
+            console.log('Cargando productos...');
+            let url = `http://127.0.0.1:5000/productos?tipo=verdura`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(productos => {
+                    const container = document.getElementById('productos-container');
+                    container.innerHTML = ''; 
+
+                    productos.forEach(producto => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product';
+
+                        if(producto.stock == 0) {
+                            productDiv.innerHTML = `
+                           <img src="${producto.imagen_url}">
+                            <h3>${producto.nombre}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción del producto...</p>
+                            <p style="color: red; font-weight: bold;">Sin stock</p>
+                            <button disabled style="background-color: grey; color: white; cursor: not-allowed;">Agregar al carrito</button>
+                        `;
+                        }
+                        else{
+                            productDiv.innerHTML = `
+                            <img src="${producto.imagen_url}">
+                            <h3>${producto.nombre}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción del producto...</p>
+                            <button onclick="addToCart('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+                        `;
+                        }
+                        
+                        container.appendChild(productDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los productos:', error);
+                });
+        }
+
+        window.onload = cargarProductos;
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
