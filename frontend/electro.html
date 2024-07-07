@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supermercado X</title>
+    <title>Electro - Supermercado X</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/electro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -47,50 +47,23 @@
         </div>
     </header>
 
-    <section class="section">
+    <section id="electro" class="section">
         <div class="container">
-            <h2>Productos</h2>
+            <h2>Electro</h2>
             <div class="product-row" id="productos-container">
-                <!-- Todos los productos -->
-            </div>
-        </div>
-    </section>
-
-    <section id="publicidad" class="section">
-        <div class="container">
-            <h2>Ofertas y Descuentos</h2>
-            <div class="carousel">
-                <div class="slides">
-                    <img src="images/publicidad1.jpg" alt="Publicidad 1" class="active">
-                    <img src="images/publicidad2.jpg" alt="Publicidad 2">
-                    <img src="images/publicidad3.jpg" alt="Publicidad 3">
-                    <img src="images/publicidad4.jpg" alt="Publicidad 4">
-                    <img src="images/publicidad5.jpg" alt="Publicidad 5">
-                </div>
-                <div class="carousel-controls">
-                    <span class="prev">&#10094;</span>
-                    <span class="next">&#10095;</span>
-                </div>
-                <div class="carousel-indicators">
-                    <span class="dot active" data-slide="0"></span>
-                    <span class="dot" data-slide="1"></span>
-                    <span class="dot" data-slide="2"></span>
-                    <span class="dot" data-slide="3"></span>
-                    <span class="dot" data-slide="4"></span>
-                </div>
+                <!-- Productos de electro -->
             </div>
         </div>
     </section>
 
     <footer id="contacto">
         <div class="container">
-            <h2>Contacto</h2>
             <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
         </div>
     </footer>
 
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
             var userLink = document.getElementById('user-link');
             var homeLink = document.getElementById('home-link');
@@ -117,7 +90,7 @@
 
         function cargarProductos() {
             console.log('Cargando productos...');
-            let url = `http://127.0.0.1:5000/productos`;
+            let url = `http://127.0.0.1:5000/productos?tipo=electro`;
 
             fetch(url)
                 .then(response => response.json())
@@ -159,5 +132,6 @@
 
         window.onload = cargarProductos;
     </script>
+    <script src="script.js"></script>
 </body>
 </html>

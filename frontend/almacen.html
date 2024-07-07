@@ -3,34 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebidas - Supermercado X</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-
+    <title>Almacen - Supermercado X</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/almacen.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <a href="login.html" id="user-link"><i class="fa-solid fa-user"></i></a>
-            <h1>Supermercado X</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#productos">Productos</a>
-                        <ul class="dropdown">
-                            <li><a href="#" id="bebidas-link">Bebidas</a></li>
-                            <li><a href="#" id="almacen-link">Almacén</a></li>
-                            <li><a href="#" id="limpieza-link">Limpieza</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="index.html#ofertas">Ofertas</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                    <li><a href="#" id="carrito-link">Carrito</a></li>
-                </ul>
-            </nav>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="perfil.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Supermercado X</h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html" id="home-link">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html" id="bebidas-link">Bebidas</a></li>
+                                <li><a href="almacen.html" id="almacen-link">Almacén</a></li>
+                                <li><a href="limpieza.html" id="limpieza-link">Limpieza</a></li>
+                                <li><a href="electro.html" id="electro-link">Electro</a></li>
+                                <li><a href="pescados.html" id="pescados-link">Pescados</a></li>
+                                <li><a href="verduras.html" id="verduras-link">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html" id="carrito-link"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section id="productos" class="section">
+    <section id="almacen" class="section">
         <div class="container">
             <h2>Almacen</h2>
             <div class="product-row" id="productos-container">
@@ -44,35 +61,31 @@
             <p>Supermercado X - Dirección: Calle Principal, Ciudad - Teléfono: 123-456-7890</p>
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
+            var userLink = document.getElementById('user-link');
+            var homeLink = document.getElementById('home-link');
             var bebidasLink = document.getElementById('bebidas-link');
             var almacenLink = document.getElementById('almacen-link');
             var limpiezaLink = document.getElementById('limpieza-link');
+            var electroLink = document.getElementById('electro-link');
+            var pescadosLink = document.getElementById('pescados-link');
+            var verdurasLink = document.getElementById('verduras-link');
             var carritoLink = document.getElementById('carrito-link');
 
             if (userId) {
+                userLink.href = `perfil.html?id=${userId}`
+                homeLink.href = `index.html?id=${userId}`
                 bebidasLink.href = `bebidas.html?id=${userId}`
                 almacenLink.href = `almacen.html?id=${userId}`
                 limpiezaLink.href = `limpieza.html?id=${userId}`
+                electroLink.href = `electro.html?id=${userId}`
+                pescadosLink.href = `pescados.html?id=${userId}`
+                verdurasLink.href = `verduras.html?id=${userId}`
                 carritoLink.href = `carrito.html?id=${userId}`
             } 
-            else{
-                bebidasLink.href = 'bebidas.html';
-                almacenLink.href = 'almacen.html';
-                limpiezaLink.href = 'limpieza.html';
-                carritoLink.href = 'carrito.html';
-            }
         });
-
-        function agregarAlCarrito(nombre, precio) {
-            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.push({ nombre, precio });
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            alert('Producto agregado al carrito');
-        }
 
         function cargarProductos() {
             console.log('Cargando productos...');
@@ -87,14 +100,26 @@
                     productos.forEach(producto => {
                         const productDiv = document.createElement('div');
                         productDiv.className = 'product';
-
-                        productDiv.innerHTML = `
-                            <img src="${producto.imagen_url}">  
+                        
+                        if(producto.stock == 0) {
+                            productDiv.innerHTML = `
+                           <img src="${producto.imagen_url}">
                             <h3>${producto.nombre}</h3>
                             <p>Precio: $${producto.precio}</p>
                             <p>Descripción del producto...</p>
-                            <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+                            <p style="color: red; font-weight: bold;">Sin stock</p>
+                            <button disabled style="background-color: grey; color: white; cursor: not-allowed;">Agregar al carrito</button>
                         `;
+                        }
+                        else{
+                            productDiv.innerHTML = `
+                            <img src="${producto.imagen_url}">
+                            <h3>${producto.nombre}</h3>
+                            <p>Precio: $${producto.precio}</p>
+                            <p>Descripción del producto...</p>
+                            <button onclick="addToCart('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+                        `;
+                        }
                         
                         container.appendChild(productDiv);
                     });
@@ -106,5 +131,6 @@
 
         window.onload = cargarProductos;
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
