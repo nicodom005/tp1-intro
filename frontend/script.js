@@ -94,44 +94,48 @@ if (document.getElementById('carrito-items')) {
     window.onload = loadCart;
 }
 
+
+
+// Funcion para el carrusel
 document.addEventListener('DOMContentLoaded', function() {
-    let slideIndex = 0;
-    const slides = document.querySelector('.slides');
-    const slideImages = document.querySelectorAll('.slides img');
-    const dots = document.querySelectorAll('.carousel-indicators .dot');
-    const prev = document.querySelector('.carousel-controls .prev');
-    const next = document.querySelector('.carousel-controls .next');
+    let indiceDiapositiva = 0;
+    const diapositivas = document.querySelector('.diapositivas');
+    const imagenesDiapositivas = document.querySelectorAll('.diapositivas img');
+    const puntos = document.querySelectorAll('.indicadores-carrusel .punto');
+    const anterior = document.querySelector('.controles-carrusel .anterior');
+    const siguiente = document.querySelector('.controles-carrusel .siguiente');
 
-    function showSlide(index) {
-        const slideWidth = slideImages[0].clientWidth;
-        slides.style.transform = `translateX(${-slideWidth * index}px)`;
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
+    function mostrarDiapositiva(indice) {
+        const anchoDiapositiva = imagenesDiapositivas[0].clientWidth;
+        diapositivas.style.transform = `translateX(${-anchoDiapositiva * indice}px)`;
+        puntos.forEach(punto => punto.classList.remove('activo'));
+        puntos[indice].classList.add('activo');
     }
 
-    function nextSlide() {
-        slideIndex = (slideIndex + 1) % slideImages.length;
-        showSlide(slideIndex);
+    function siguienteDiapositiva() {
+        indiceDiapositiva = (indiceDiapositiva + 1) % imagenesDiapositivas.length;
+        mostrarDiapositiva(indiceDiapositiva);
     }
 
-    function prevSlide() {
-        slideIndex = (slideIndex - 1 + slideImages.length) % slideImages.length;
-        showSlide(slideIndex);
+    function anteriorDiapositiva() {
+        indiceDiapositiva = (indiceDiapositiva - 1 + imagenesDiapositivas.length) % imagenesDiapositivas.length;
+        mostrarDiapositiva(indiceDiapositiva);
     }
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            slideIndex = index;
-            showSlide(slideIndex);
+    puntos.forEach(punto => {
+        punto.addEventListener('click', () => {
+            indiceDiapositiva = parseInt(punto.getAttribute('data-slide'));
+            mostrarDiapositiva(indiceDiapositiva);
         });
     });
 
-    prev.addEventListener('click', prevSlide);
-    next.addEventListener('click', nextSlide);
+    anterior.addEventListener('click', anteriorDiapositiva);
+    siguiente.addEventListener('click', siguienteDiapositiva);
 
-    // Autoplay
-    setInterval(nextSlide, 5000); // Cambia de imagen cada 5 segundos
+    // Reproducción automática
+    setInterval(siguienteDiapositiva, 5000); // Cambia de imagen cada 5 segundos
 });
+
 
 
 
