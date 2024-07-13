@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Historial de Transacciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Solari</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <script src="script.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container header-content">
+                <a href="perfil.html" id="user-link"><i class="fa-solid fa-user"></i></a>
+                <div class="title-logo">
+                    <h1>Solari </h1>
+                    <img src="images/logo.png" alt="Logo Supermercado X" id="logo">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container header-actions">
+                <nav>
+                    <ul>
+                        <li><a href="index.html" id="home-link">Home</a></li>
+                        <li><a href="#" class="no-link">Productos</a>
+                            <ul class="dropdown">
+                                <li><a href="bebidas.html" id="bebidas-link">Bebidas</a></li>
+                                <li><a href="almacen.html" id="almacen-link">Almacén</a></li>
+                                <li><a href="limpieza.html" id="limpieza-link">Limpieza</a></li>
+                                <li><a href="electro.html" id="electro-link">Electro</a></li>
+                                <li><a href="pescados.html" id="pescados-link">Pescados</a></li>
+                                <li><a href="verduras.html" id="verduras-link">Verduras</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="carrito.html" id="carrito-link"><i class="fas fa-shopping-cart"></i></a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <h1>Historial de Transacciones</h1>
+
+    <table id="historial-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Usuario</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos serán insertados dinámicamente aquí -->
+        </tbody>
+    </table>
+    <script>
+        var idUsuario = obtenerIdUsuario();
+        function obtenerHistorial(idusuario) {
+            fetch(`'http://127.0.0.1:5000/historial/'` + idusuario)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#historial-table tbody');
+                    tableBody.innerHTML = '';
+                    data.forEach(registro => {
+                        const row = `
+                            <tr>
+                                <td>${registro.id}</td>
+                                <td>${registro.idusuario}</td>
+                                <td>${registro.monto}</td>
+                                <td>${registro.fecha}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error al obtener el historial:', error));
+        }
+
+
+
+
+    </script>
+</body>
+</html>
