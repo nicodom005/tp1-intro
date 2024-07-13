@@ -73,6 +73,7 @@
 
         function cerrar_sesion() {
             localStorage.removeItem('carrito');
+            localStorage.removeItem('idUsuario');
         }
 
         window.onload = cerrar_sesion;

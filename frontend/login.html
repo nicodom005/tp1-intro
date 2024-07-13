@@ -22,7 +22,7 @@
     </div>
     
     <script>
-        function inicio_sesion(event) {
+       function inicio_sesion(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -43,15 +43,16 @@
                     alert(data.error);
                 } else {
                     console.log('ID de usuario:', data.idusuario);
+                    localStorage.setItem('idUsuario', data.idusuario); 
                     alert('Inicio de sesión exitoso');
-                    window.location.href = 'perfil.html?id=' + data.idusuario;
+                    window.location.href = 'perfil.html'; 
                 }
             })
             .catch(error => {
                 console.error('Error en la solicitud:', error);
                 alert('Error en la solicitud de inicio de sesión');
             });
-        }
+}
     </script>
 </body>
 </html>

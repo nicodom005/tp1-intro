@@ -45,11 +45,11 @@
             var userId = obtenerIdUsuario();
             var homeLink = document.getElementById('home-link');
             var historialLink = document.getElementById('historial-link');
-            if (userId) {
-                homeLink.href = `index.html?id=${userId}`
-                historialLink.href = `historial.html?id=${userId}`
-            } else {
+            if (userId == null) {
                 window.location.href = 'login.html';
+            } else {
+                homeLink.href = 'index.html';
+                historialLink.href = 'historial.html';
             }
         });
         
@@ -113,6 +113,7 @@
         function cerrar_sesion(event) {
             event.preventDefault();
             localStorage.removeItem('carrito');
+            localStorage.removeItem('idUsuario');
             window.location.href = 'login.html';
         }
 

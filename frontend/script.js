@@ -1,11 +1,6 @@
-
 function obtenerIdUsuario() {
-    var params = new URLSearchParams(window.location.search);
-    var idUsuario = params.get('id'); 
-
-    return idUsuario;
+    return localStorage.getItem('idUsuario');
 }
-
 // Función para agregar productos al carrito
 function addToCart(name, price) {
     let cart = JSON.parse(localStorage.getItem('carrito')) || [];

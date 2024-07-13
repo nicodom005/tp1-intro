@@ -85,33 +85,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
-            var userLink = document.getElementById('user-link');
-            var homeLink = document.getElementById('home-link');
-            var bebidasLink = document.getElementById('bebidas-link');
-            var almacenLink = document.getElementById('almacen-link');
-            var limpiezaLink = document.getElementById('limpieza-link');
-            var electroLink = document.getElementById('electro-link');
-            var pescadosLink = document.getElementById('pescados-link');
-            var verdurasLink = document.getElementById('verduras-link');
-            var carritoLink = document.getElementById('carrito-link');
 
-            if (userId) {
-                userLink.href = `perfil.html?id=${userId}`
-                homeLink.href = `index.html?id=${userId}`
-                bebidasLink.href = `bebidas.html?id=${userId}`
-                almacenLink.href = `almacen.html?id=${userId}`
-                limpiezaLink.href = `limpieza.html?id=${userId}`
-                electroLink.href = `electro.html?id=${userId}`
-                pescadosLink.href = `pescados.html?id=${userId}`
-                verdurasLink.href = `verduras.html?id=${userId}`
-                carritoLink.href = `carrito.html?id=${userId}`
-            }
-            else {
+            if (userId == null) {
                 window.location.href = 'login.html';
             }
-
-            var idUsuario = obtenerIdUsuario();
-            obtenerHistorial(idUsuario);
+            obtenerHistorial(userId);
         });
 
         function obtenerHistorial(idusuario) {
@@ -134,10 +112,6 @@
                 })
                 .catch(error => console.error('Error al obtener el historial:', error));
         }
-
-
-
-
     </script>
 </body>
 </html>
