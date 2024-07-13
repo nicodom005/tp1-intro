@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__, template_folder='frontend')
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:admin@localhost:5432/tp1_intro'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'ajdhaskjdhasdkashdj'
 
@@ -19,6 +19,8 @@ class Historial(db.Model):
     idusuario = db.Column(db.Integer, db.ForeignKey('usuarios.idusuario'), nullable=False)
     monto = db.Column(db.Numeric(10, 2), nullable=False)
     fecha = db.Column(db.DateTime, default=datetime.utcnow)
+
+    usuario = db.relationship('Usuarios', backref=db.backref('historial', lazy=True))
 
 
 class Usuarios(db.Model):
@@ -42,24 +44,22 @@ class Productos(db.Model):
 
 
 @app.route('/historial/<int:idusuario>', methods=['GET'])
-def obtener_historial():
-    datos_usuarios = request.get_json
-    idusuario = datos_usuarios.get('idusuario')
-    historial_usuario = Historial.query.get(idusuario)
+def obtener_historial(idusuario):
+    historial_usuario = Historial.query.filter_by(idusuario=idusuario).all()
 
     if not historial_usuario:
         return jsonify({'Error': 'No existe el historial'}), 400
-    else:
-        historial_serializado = []
-        historial_serializado = {
-            'id': Historial.idhistorial,     
-            'idusuario': Historial.idusuario,
-            'monto': Historial.monto,
-            'fecha': Historial.fecha
-        }
-        
-        return jsonify(historial_serializado), 200
 
+    historial_serializado = [
+        {
+            'id': registro.id,
+            'idusuario': registro.usuario.nombre,
+            'monto': str(registro.monto),  
+            'fecha': registro.fecha.strftime('%Y-%m-%d %H:%M:%S')
+        } for registro in historial_usuario
+    ]
+
+    return jsonify(historial_serializado), 200
 
 
 
@@ -191,6 +191,14 @@ def procesar_pago(idusuario):
         usuario.monto -= precio
     print(f"Saldo restante: {usuario.monto}")
 
+   
+    historial = Historial(
+        idusuario=idusuario,
+        monto=precio,
+        fecha=datetime.utcnow()
+    )
+    db.session.add(historial)
+
     db.session.commit()
     return jsonify({'success': True})
 
@@ -213,7 +221,6 @@ def index():
 @app.route('/usuarios/<int:idusuario>', methods=['GET'])
 def obtener_usuario(idusuario):
     usuario = db.session.query(Usuarios).get(idusuario)
-    historial = Historial.query.filter_by(idusuario = usuario.id).first()
 
     usuario_serializado = {
         'id': usuario.idusuario,
@@ -221,7 +228,6 @@ def obtener_usuario(idusuario):
         'contrasenia': usuario.contrasenia,
         'email': usuario.email,
         'monto': usuario.monto,
-        'gastado': historial.gastado
     }
     return jsonify(usuario_serializado), 200
 

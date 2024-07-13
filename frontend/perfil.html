@@ -34,6 +34,9 @@
             <div class="button-container">    
                 <a href="#" id="home-link"><i class="fa-solid fa-house"></i></a>
             </div>
+            <div class="button-container">    
+                <a href="#" id="historial-link"><i class="fa-solid fa-clock-rotate-left"></i></a>
+            </div>
         </form>
     </div>
 
@@ -41,8 +44,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var userId = obtenerIdUsuario();
             var homeLink = document.getElementById('home-link');
+            var historialLink = document.getElementById('historial-link');
             if (userId) {
                 homeLink.href = `index.html?id=${userId}`
+                historialLink.href = `historial.html?id=${userId}`
             } else {
                 window.location.href = 'login.html';
             }
